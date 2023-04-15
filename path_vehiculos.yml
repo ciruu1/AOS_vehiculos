@@ -1,0 +1,60 @@
+get:
+  summary: Obtener todos los vehículos
+  description: ''
+  operationId: vehiculo_cget
+  tags: ['🚗 Vehiculos']
+  responses:
+    '200':
+      description: Lista de vehículos
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: 'schema_vehiculo.yml'
+    '404':
+      $ref: 'openapi.yaml#/components/responses/Response_404'
+post:
+  summary: Añadir un nuevo vehículo
+  description: ''
+  operationId: vehiculo_cpost
+  tags: ['🚗 Vehiculos']
+  requestBody:
+    description: Datos del vehículo a añadir
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'schema_vehiculo.yml'
+  responses:
+    '201':
+      description: Vehículo creado
+      headers:
+        Location:
+          $ref: 'openapi.yaml#/components/headers/Location'
+      content:
+        application/json:
+          schema:
+            $ref: 'schema_vehiculo.yml'
+      links:
+        vehiculo_get:
+          operationId: vehiculo_get
+          description: 'Obtener un vehículo por VIN'
+          parameters:
+            vin: '$response.body#/vin'
+        vehiculo_put:
+          operationId: vehiculo_put
+          description: 'Actualizar un vehículo por VIN'
+          parameters:
+            vin: '$response.body#/vin'
+        vehiculo_delete:
+          operationId: vehiculo_delete
+          description: 'Eliminar un vehículo por VIN'
+          parameters:
+            vin: '$response.body#/vin'
+    '400':
+      $ref: 'openapi.yaml#/components/responses/Response_400'
+    '409':
+      $ref: 'openapi.yaml#/components/responses/Response_409'
+    '422':
+      $ref: 'openapi.yaml#/components/responses/Response_422'

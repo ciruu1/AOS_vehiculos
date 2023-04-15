@@ -1,0 +1,84 @@
+get:
+  summary: Obtener un vehículo por VIN
+  description: ''
+  operationId: vehiculo_get
+  tags: [ '🚗 Vehiculos' ]
+  parameters:
+    - name: vin
+      in: path
+      required: true
+      description: VIN del vehículo
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Vehículo encontrado
+      headers:
+        ETag:
+          $ref: 'openapi.yaml#/components/headers/ETag'
+      content:
+        application/json:
+          schema:
+            $ref: 'schema_vehiculo.yml'
+    '404':
+      $ref: 'openapi.yaml#/components/responses/Response_404'
+options:
+  summary: Proporciona la lista de los métodos HTTP soportados por esta ruta.
+  description: Devuelve una cabecera `Allow` con la lista de métodos HTTP soportados (separados por comas).
+  operationId: vehiculo_options
+  tags: [ '🚗 Vehiculos' ]
+  responses:
+    '204':
+      description: 'cabecera `Allow` &lt;El cuerpo de la respuesta está vacío&gt;'
+      headers:
+        Allow:
+          $ref: 'openapi.yaml#/components/headers/Allow'
+put:
+  summary: Actualizar un vehículo por VIN
+  description: ''
+  operationId: vehiculo_put
+  tags: [ '🚗 Vehiculos' ]
+  parameters:
+    - name: vin
+      in: path
+      required: true
+      description: VIN del vehículo
+      schema:
+        type: string
+  requestBody:
+    description: Datos actualizados del vehículo
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'schema_vehiculo.yml'
+  responses:
+    '200':
+      description: Vehículo actualizado
+      content:
+        application/json:
+          schema:
+            $ref: 'schema_vehiculo.yml'
+    '404':
+      $ref: 'openapi.yaml#/components/responses/Response_404'
+    '412':
+      $ref: 'openapi.yaml#/components/responses/Response_412'
+    '422':
+      $ref: 'openapi.yaml#/components/responses/Response_422'
+delete:
+  summary: Eliminar un vehículo por VIN
+  description: ''
+  operationId: vehiculo_delete
+  tags: [ '🚗 Vehiculos' ]
+  parameters:
+    - name: vin
+      in: path
+      required: true
+      description: VIN del vehículo
+      schema:
+        type: string
+  responses:
+    '204':
+      description: Vehiculo eliminado &lt;Cuerpo de la respuesta vacío&gt;
+    '404':
+      $ref: 'openapi.yaml#/components/responses/Response_404'
