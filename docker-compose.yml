@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  mock_backend:
+    image: openjdk:8-jdk-alpine
+    restart: always
+    volumes:
+      - ./target/swagger-spring-1.0.0-jar-with-dependencies.jar:/app.jar
+    entrypoint: [ 'java', '-jar', '/app.jar' ]
+    #    image: stoplight/prism:4
+    container_name: aos2023_mock
+    #    command: mock --cors -h 0.0.0.0 "/aos/openapi.yaml"
+    ports:
+      - "4010:4010"
+  #    volumes:
+  #      - ./openapi:/aos:ro
+
+  frontend:
+    image: swaggerapi/swagger-ui:latest
+    #container_name: aos2023_ui
+    ports:
+      - "8000:8080"
+    environment:
+      SWAGGER_JSON: /aos/openapi.yaml
+    volumes:
+      - ./openapi:/aos:ro
+
+  proxy:
+    image: caddy:latest
+    container_name: aos2023_proxy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy_data:/data
+    ports:
+      - "80:80"
+    depends_on:
+      - mock_backend
+  vehiculos-db:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=vehiculos
+      - MYSQL_USER=vehiculos
+      - MYSQL_PASSWORD=vehiculos_password
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data: {}
