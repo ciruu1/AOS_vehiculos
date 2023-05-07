@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   title: Subsistema 2
   description: >
-    ## **[AOS 2023]** ✈️ API REST para la gestión de Plataformas y Aeronaves.
+    ## **[AOS 2023]** Sistema de Gestión de talleres de mecánica rápida
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
