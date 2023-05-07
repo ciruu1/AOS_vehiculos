@@ -56,7 +56,7 @@ components:
         instance:
           type: string
           format: uri
-          description: >
+          description: >for
             A URI reference that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
 
@@ -98,8 +98,6 @@ components:
         type: string
         format: uri
         x-faker: internet.url
-        example:
-          https://example.com/api/v1/plataformas/P01-001-A
 
   responses:
     Response_400:
