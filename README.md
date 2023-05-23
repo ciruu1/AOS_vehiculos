@@ -26,3 +26,4 @@ Y con eso se deberían estar ejecutando todos los contenedores docker con la apl
 
 Este servidor ha sido generado por [swagger-codegen](https://github.com/swagger-api/swagger-codegen) usando `openapi.yaml`.
 
+Imagen del servicio en [dockerhub](https://hub.docker.com/r/inesdeelias/servicio11/tags).
